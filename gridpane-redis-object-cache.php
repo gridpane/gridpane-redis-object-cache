@@ -3,7 +3,7 @@
 Plugin Name: GridPane Redis Object Cache
 Plugin URI: https://gitlab.gridpane.com/gp-public/gridpane-redis-object-cache
 Description: A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, HHVM, replication, clustering and WP-CLI.
-Version: 1.5.5
+Version: 1.5.6
 Text Domain: gridpane-redis-object-cache
 Domain Path: /languages
 Author: Till Krüss | Forked by GridPane
@@ -12,6 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Forked from Till Krüss Redis Cache plugin when 1.5+ updates to incorporate his new features and PRO stuff started causing selective flush to break.
 Added some extra options - flush button in toolbar and option to display cached objects in page footer.
+
+Based on Eric Mann's and Erick Hitter's Redis Object Cache:
+https://github.com/ericmann/Redis-Object-Cache
 */
 
 
@@ -453,6 +456,10 @@ $GLOBALS[ 'redisObjectCache' ] = new RedisObjectCache;
 
 if (get_option('gridpane_add_flush_button')) {
 
+	if ( is_multisite() ) {
+		return;
+	}
+
 	if ( function_exists( 'wp_cache_flush' ) ) {
 		add_action( 'admin_bar_menu', 'flush_object_cache_button', 100 );
 	}
@@ -486,6 +493,10 @@ function flush_object_cache_button( $wp_admin_bar ) {
 }
 
 if (get_option('gridpane_show_redis_output')) {
+
+	if ( is_multisite() ) {
+		return;
+	}
 
 	add_action( 'wp_footer', function () {
 		if ( ! current_user_can( 'manage_options' ) ) {
