@@ -6,7 +6,7 @@ Description: A persistent object cache backend powered by Redis. Supports Predis
 Version: 1.5.6
 Text Domain: gridpane-redis-object-cache
 Domain Path: /languages
-Author: Till Krüss | Forked by GridPane
+Author: Version Forked by GridPane | Till Krüss
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
