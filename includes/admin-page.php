@@ -63,14 +63,15 @@
 
 	<?php $this->show_servers_list(); ?>
 
-    <form class="tools" method="post" action="options.php">
-		<?php
-		settings_fields( 'gridpane-redis-object-cache-settings' );
-		do_settings_sections( 'gridpane-redis-object-cache-settings' );
-		submit_button();
-		?>
-    </form>
-
+    <?php if ( ! is_multisite() ) { ?>
+        <form class="tools" method="post" action="options.php">
+            <?php
+            settings_fields( 'gridpane-redis-object-cache-settings' );
+            do_settings_sections( 'gridpane-redis-object-cache-settings' );
+            submit_button();
+            ?>
+        </form>
+    <?php } ?>
 	<?php if ( isset( $_GET[ 'diagnostics' ] ) ) : ?>
 
         <h2 class="title"><?php _e( 'Diagnostics', 'gridpane-redis-object-cache' ); ?></h2>
